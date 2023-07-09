@@ -1,0 +1,44 @@
+version: '3.7'
+volumes:
+  mongodata:
+services:
+  mongo-storage:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: qwerty
+    volumes:
+      - ./mongodata:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: qwerty
+      ME_CONFIG_MONGODB_URL: mongodb://root:qwerty@mongo-storage:27017/?authMechanism=DEFAULT
+    depends_on:
+      - mongo-storage
+
+  # Connecting main app
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_URL=mongo-storage
+    ports:
+      - 5000:80
+    depends_on:
+      - mongo-storage
+
+  
+
+  

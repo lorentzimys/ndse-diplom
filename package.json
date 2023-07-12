@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Курсовой проект представляет собой службу доставки. Ваша задача — создать работающее бэкенд-приложение,\r всеми основными функциями которого можно пользоваться.",
-  "main": "index.ts",
   "scripts": {
     "start": "npm run start:dev",
-    "start:dev": "nodemon --watch ./src/**/*.js --exec node ./src/index.js",
+    "start:dev": "nodemon --watch src ./src/index.js",
     "start:prod": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +27,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "eslint": "^8.44.0",
     "nodemon": "^2.0.22"
   },
   "engines": {

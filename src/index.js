@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import AdvertisementModule from "./common/AdvertisementModule.js";
 
 import { PORT, MONGO_URL } from "./config.js";
-import fileUpload from "@root/middleware/file";
+import fileUpload from "./middleware/file.js";
 
 const API_PATHS = {
   SIGNUP: '/api/signup',
@@ -28,10 +28,19 @@ const initMongoDb = async () => {
 const initApp = async () => {
   const app = express();
 
-  await initMongoDb();
+  // await initMongoDb();
   
   app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({ extended: true }));
+  
+  app.use("/", (req, res, next) => {
+    res.send("Hello world!");
+    next();
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
   
   // Sign up
   app.post(API_PATHS.SIGNUP, (req, res, next) => {
@@ -117,7 +126,7 @@ const initApp = async () => {
         images,
         userId
       });
-  
+      
       res.status(201).json(newAd);
     } catch (err) {
       res.status(500).json({
@@ -142,15 +151,6 @@ const initApp = async () => {
       });
     }
   
-  });
-  
-  app.use("/", (req, res, next) => {
-    res.send("Hello world!");
-  });
-  
-  
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
   });
 };
 

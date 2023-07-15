@@ -1,0 +1,661 @@
+{
+	"info": {
+		"_postman_id": "67aa47f5-6398-4675-b139-24a39856f037",
+		"name": "ndjs-diplom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "924749"
+	},
+	"item": [
+		{
+			"name": "Advertisement",
+			"item": [
+				{
+					"name": "getAdvertisements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/api/advertisements",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"advertisements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAdvertisement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/api/advertisements/64b29ffaf1612226e78770ed",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"advertisements",
+								"64b29ffaf1612226e78770ed"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "invalid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/advertisements/indalidId",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"advertisements",
+										"indalidId"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Valid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/advertisements/64b29ffaf1612226e78770ed",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"advertisements",
+										"64b29ffaf1612226e78770ed"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "createAdvertisement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/Users/lorentzimys/Downloads/MP3UI-539.html",
+										"/Users/lorentzimys/Downloads/Knowledge-Genesis-Reviews-E608445.htm"
+									]
+								},
+								{
+									"key": "shortTitle",
+									"value": "{{$randomLoremParagraph}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "{{$randomLoremParagraphs}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": "[\"cars\", \"vehicles\"]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/api/advertisements",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"advertisements"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAt",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "updatedAt",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Valid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"/Users/lorentzimys/Downloads/MP3UI-539.html",
+												"/Users/lorentzimys/Downloads/Knowledge-Genesis-Reviews-E608445.htm"
+											]
+										},
+										{
+											"key": "shortTitle",
+											"value": "{{$randomLoremParagraph}}",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "{{$randomLoremParagraphs}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags",
+											"value": "[\"cars\", \"vehicles\"]",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/advertisements",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"advertisements"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "createdAt",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "updatedAt",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"/Users/lorentzimys/Downloads/MP3UI-539.html",
+												"/Users/lorentzimys/Downloads/Knowledge-Genesis-Reviews-E608445.htm"
+											]
+										},
+										{
+											"key": "shortTitle",
+											"value": "{{$randomLoremParagraph}}",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "{{$randomLoremParagraphs}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags",
+											"value": "[\"cars\", \"vehicles\"]",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/advertisements",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"advertisements"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "createdAt",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "updatedAt",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Invalid Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"/Users/lorentzimys/Downloads/MP3UI-539.html",
+												"/Users/lorentzimys/Downloads/Knowledge-Genesis-Reviews-E608445.htm"
+											]
+										},
+										{
+											"key": "shortTitle",
+											"value": "{{$randomLoremParagraph}}",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "{{$randomLoremParagraphs}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags",
+											"value": "[\"cars\", \"vehicles\"]",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/advertisements",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"advertisements"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "createdAt",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "updatedAt",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "deleteAdvertisement",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/api/advertisements/64b2d97137e526bf52915a01",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"advertisements",
+								"64b2d97137e526bf52915a01"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAt",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "updatedAt",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test12@yandex.ru",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "testPwd",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "{{$randomUserName}}",
+									"type": "text"
+								},
+								{
+									"key": "contactPhone",
+									"value": "+7999145514",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/api/signup",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "signup-w/o-tel",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "test@ya.ru",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "testPwd",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "{{$randomUserName}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/signup",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"signup"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "698"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ba-5yLmA26rU0KYt65f5Vjd0rGQk3k\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Jul 2023 09:30:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"$__\": {\n            \"activePaths\": {\n                \"paths\": {\n                    \"name\": \"require\",\n                    \"passwordHash\": \"require\",\n                    \"email\": \"require\"\n                },\n                \"states\": {\n                    \"require\": {\n                        \"name\": true,\n                        \"passwordHash\": true,\n                        \"email\": true\n                    },\n                    \"default\": {},\n                    \"modify\": {}\n                }\n            },\n            \"op\": null,\n            \"saving\": null,\n            \"$versionError\": null,\n            \"saveOptions\": null,\n            \"validating\": null,\n            \"cachedRequired\": {},\n            \"backup\": {\n                \"activePaths\": {\n                    \"modify\": {\n                        \"email\": true,\n                        \"passwordHash\": true,\n                        \"name\": true,\n                        \"contactPhone\": true\n                    },\n                    \"default\": {\n                        \"_id\": true\n                    }\n                },\n                \"validationError\": null\n            },\n            \"inserting\": true,\n            \"savedState\": {}\n        },\n        \"_doc\": {\n            \"email\": \"Sydney16@hotmail.com\",\n            \"passwordHash\": \"f2489310dbe7c2163c8cf9e5cf3116f722a81d54a2c35582fa7fbe3cc2018411\",\n            \"name\": \"Domingo.Mills91\",\n            \"_id\": \"64afc41d6ee3dbbe45999407\",\n            \"__v\": 0\n        },\n        \"$isNew\": false\n    },\n    \"status\": \"ok\"\n}"
+						},
+						{
+							"name": "signup-w-tel",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "{{$randomEmail}}",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "testPwd",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "{{$randomUserName}}",
+											"type": "text"
+										},
+										{
+											"key": "contactPhone",
+											"value": "{{$randomPhoneNumber}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{HOST}}:{{PORT}}/api/signup",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"signup"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "698"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ba-5yLmA26rU0KYt65f5Vjd0rGQk3k\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Jul 2023 09:30:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"$__\": {\n            \"activePaths\": {\n                \"paths\": {\n                    \"name\": \"require\",\n                    \"passwordHash\": \"require\",\n                    \"email\": \"require\"\n                },\n                \"states\": {\n                    \"require\": {\n                        \"name\": true,\n                        \"passwordHash\": true,\n                        \"email\": true\n                    },\n                    \"default\": {},\n                    \"modify\": {}\n                }\n            },\n            \"op\": null,\n            \"saving\": null,\n            \"$versionError\": null,\n            \"saveOptions\": null,\n            \"validating\": null,\n            \"cachedRequired\": {},\n            \"backup\": {\n                \"activePaths\": {\n                    \"modify\": {\n                        \"email\": true,\n                        \"passwordHash\": true,\n                        \"name\": true,\n                        \"contactPhone\": true\n                    },\n                    \"default\": {\n                        \"_id\": true\n                    }\n                },\n                \"validationError\": null\n            },\n            \"inserting\": true,\n            \"savedState\": {}\n        },\n        \"_doc\": {\n            \"email\": \"Sydney16@hotmail.com\",\n            \"passwordHash\": \"f2489310dbe7c2163c8cf9e5cf3116f722a81d54a2c35582fa7fbe3cc2018411\",\n            \"name\": \"Domingo.Mills91\",\n            \"_id\": \"64afc41d6ee3dbbe45999407\",\n            \"__v\": 0\n        },\n        \"$isNew\": false\n    },\n    \"status\": \"ok\"\n}"
+						}
+					]
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@ya.ru",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "testPwd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/api/signin",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

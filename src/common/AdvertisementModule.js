@@ -22,13 +22,26 @@ class AdvertisementModule {
     }
   }
   
-  static async create(data) {
-    return new AdvertisementModel(data).save();
+  static async create({ shortText, description, userId, images, tags }) {
+    return new AdvertisementModel({
+      shortText,
+      description,
+      userId,
+      images,
+      tags,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      isDeleted: false,
+    }).save();
   }
   
   static async remove(id) {
     try {
-      await AdvertisementModel.findByIdAndRemove(id);
+      const ad = await AdvertisementModel.findByIdAndUpdate(id, {
+        isDeleted: true,
+      });
+
+      return ad;
     } catch (err) {
       console.log(err);
     }

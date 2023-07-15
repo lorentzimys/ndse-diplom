@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 import passport from "passport";
+import path from "path";
 
 import { PORT, MONGO_URL } from "./config.js";
 
@@ -24,6 +25,7 @@ const initApp = async () => {
 
   await initMongoDb();
   
+  app.use(express.static(path.resolve("public")));
   app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({ extended: true }));
   
@@ -41,7 +43,7 @@ const initApp = async () => {
   app.use(passport.initialize()) 
   app.use(passport.session());
 
-  app.listen(PORT, () => {
+  app.listen(PORT, async () => {
     console.log(`Server listening on port ${PORT}`);
   });
   

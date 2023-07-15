@@ -1,4 +1,5 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
+import { UserModel } from "./User.js";
 
 const AdvertisementSchema = new Schema({
   shortText: {
@@ -17,7 +18,8 @@ const AdvertisementSchema = new Schema({
     unique: false,
   },
   userId: {
-    type: Schema.Types.ObjectId,
+    type: ObjectId,
+    ref: UserModel,
     required: false, //true,
     unique: false,
   },

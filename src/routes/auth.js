@@ -68,9 +68,8 @@ const deserializeFromSession = async function (data, cb) {
 
 // Sign up
 const signUp = async function (req, res, next) {
-  const { email, password, name, contactPhone } = req.body;
-
   try {
+    const { email, password, name, contactPhone } = req.body;
     const userExists = !!(await UserModule.findByEmail(email));
 
     if (userExists) {

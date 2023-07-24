@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { API_PATHS } from '../api.js';
 import fileUpload from "../middleware/file.js";
 import checkAuth from "../middleware/checkAuth.js";
-import AdvertisementModule from "../common/AdvertisementModule.js";
+import AdvertisementModule from "../modules/Advertisement.js";
 import { AdvertisementModel } from '../models/Advertisement.js';
 import checkIsCurrentUser from '../middleware/checkIsCurrentUser.js';
 
@@ -131,4 +131,4 @@ adRouter.delete(API_PATHS.DELETE_ADVERTISEMENT, checkAuth, checkIsCurrentUser, d
 adRouter.post(API_PATHS.CREATE_ADVERTISEMENT, checkAuth, fileUpload.array("images"), createAd);
 adRouter.get(API_PATHS.GET_ADVERTISEMENTS, getAllAds);
 
-export default adRouter
+export default adRouter;

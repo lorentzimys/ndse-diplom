@@ -5,6 +5,7 @@ const API_PATHS = {
   GET_ADVERTISEMENT: '/api/advertisements/:id',
   CREATE_ADVERTISEMENT: '/api/advertisements',
   DELETE_ADVERTISEMENT: '/api/advertisements/:id',
+  USERS_CHAT: '/chat/:id',
 };
 
 export { API_PATHS }

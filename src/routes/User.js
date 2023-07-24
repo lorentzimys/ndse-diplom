@@ -4,7 +4,7 @@ import crypto from "crypto";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 
-import UserModule from "../common/UserModule.js"
+import UserModule from "../modules/User.js"
 import { API_PATHS } from '../api.js';
 
 // Config
@@ -137,5 +137,9 @@ passport.deserializeUser(deserializeFromSession);
 
 authRouter.post(API_PATHS.SIGNUP, signUp);
 authRouter.post(API_PATHS.SIGNIN, signIn);
+authRouter.get('/currentUser', (req, res) => {
+  console.log(req.user);
+  res.json(req.user);
+});
 
 export default authRouter;

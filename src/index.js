@@ -1,15 +1,21 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import MongoStore from "connect-mongo";
-import session from "express-session";
+
 import passport from "passport";
+
 import path from "path";
+import { createServer } from "http";
 
 import { PORT, MONGO_URL } from "./config.js";
 
-import authRouter from "./routes/auth.js";
-import adRouter from "./routes/ad.js";
+import ChatModule from "./modules/Chat.js";
+
+import authRouter from "./routes/User.js";
+import adRouter from "./routes/Advertisement.js";
+import chatRouter from "./routes/Chat.js";
+
+import sessionMiddleware from "./middleware/session.js";
 
 const initMongoDb = async () => {
   try {
@@ -28,32 +34,36 @@ const initApp = async () => {
   app.use(express.static(path.resolve("public")));
   app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({ extended: true }));
-  
-  app.use(session({
-    secret: 'top secret',
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false, // don't create session until something stored
-    store: MongoStore.create({
-      mongoUrl: MONGO_URL,
-      dbName: "ndjs",
-      collectionName: "sessions",
-    })
-  }));
+
+  app.use(sessionMiddleware);
   
   app.use(passport.initialize()) 
   app.use(passport.session());
 
-  app.listen(PORT, async () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
+  const httpServer = createServer(app);
+
+  ChatModule.initSocketConnection(httpServer);
+
+  app.set("views", path.resolve("src", "views"));
+  app.set("view engine", "ejs");
   
   app.use('/', authRouter);
   app.use('/', adRouter);
+  app.use('/', chatRouter);
   
   app.use("/", (req, res, next) => {
     res.send("Hello world!");
     next();
   });
+
+  httpServer.listen(PORT, async () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+
+  ChatModule.subscribe(({ chatId, message }) => {
+    console.log(chatId, message);
+  });
+
 };
 
 initApp();

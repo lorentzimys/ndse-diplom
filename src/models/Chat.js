@@ -13,6 +13,8 @@ const ChatMessageSchema = new Schema({
     type: Date,
     required: true,
     unique: false,
+    default: Date.now,
+    set: (val) => new Date(val),
   },
   text: {
     type: String,
@@ -32,12 +34,6 @@ const ChatSchema = new Schema({
     ref: UserModel,
     required: true,
     unique: false,
-  },
-  usersHash: {
-    type: String,
-    required: true,
-    unique: true,
-    set: (_) => calcHashForArray(this.users),
   },
   createdAt: {
     type: Date,

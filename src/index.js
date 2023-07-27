@@ -41,29 +41,54 @@ const initApp = async () => {
   app.use(passport.session());
 
   const httpServer = createServer(app);
+  
+  // Sending message to chat
+  const author = '64ba2ad3e690fbc3778bbd45';
+  const reciever = '64c1cfeaa31842a90f817e88';
+  
+  const io = ChatModule.prepareSocketConnection(httpServer);
 
-  ChatModule.initSocketConnection(httpServer);
+  io.on("connection", (socket) => {
+    // 2.5.1 Событие getHistory
+    socket.on("getHistory", async (senderUserId) => {
+      try {
+        const chat = await ChatModule.find([reciever, senderUserId]);
+        const chatHistory = await ChatModule.getHistory(chat._id);
+  
+        socket.emit("chatHistory", chatHistory);
+      } catch (error) {
+        console.log(error);
+      }
+    });
 
+    // 2.5.2 Событие sendMessage
+    socket.on("sendMessage", (reciever, message) => {
+      // 2.5.3 Событие newMessage
+      socket.emit("newMessage", message);
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
+
+  // При подключении нового клиента должна создаваться подписка на новые сообщения в чате (модуль «Чат»).
+  // Полученное сообщение передаётся целиком клиенту.
+  ChatModule.subscribe(({ chatId, message }) => {
+    console.log(`Chat module subsctiption: chatId=${chatId}, message=${message}`);
+  });
+ 
   app.set("views", path.resolve("src", "views"));
   app.set("view engine", "ejs");
   
   app.use('/', authRouter);
   app.use('/', adRouter);
   app.use('/', chatRouter);
-  
+
   app.use("/", (req, res, next) => {
-    res.send("Hello world!");
+    res.send(`NDSE backend is running on port ${PORT}`);
     next();
   });
-
-  httpServer.listen(PORT, async () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
-
-  ChatModule.subscribe(({ chatId, message }) => {
-    console.log(chatId, message);
-  });
-
 };
 
 initApp();

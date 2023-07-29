@@ -15,7 +15,8 @@ import authRouter from "./routes/User.js";
 import adRouter from "./routes/Advertisement.js";
 import chatRouter from "./routes/Chat.js";
 
-import sessionMiddleware from "./middleware/session.js";
+
+import UserModule from "./modules/User.js";
 
 const initMongoDb = async () => {
   try {
@@ -35,24 +36,18 @@ const initApp = async () => {
   app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.use(sessionMiddleware);
-  
-  app.use(passport.initialize()) 
-  app.use(passport.session());
+  UserModule.prepareAuth(app);
 
   const httpServer = createServer(app);
-  
-  // Sending message to chat
-  const author = '64ba2ad3e690fbc3778bbd45';
-  const reciever = '64c1cfeaa31842a90f817e88';
-  
   const io = ChatModule.prepareSocketConnection(httpServer);
-
+  
   io.on("connection", (socket) => {
+    const currentUser = socket.request.user;
+    
     // 2.5.1 Событие getHistory
     socket.on("getHistory", async (senderUserId) => {
       try {
-        const chat = await ChatModule.find([reciever, senderUserId]);
+        const chat = await ChatModule.find([currentUser.id, senderUserId]);
         const chatHistory = await ChatModule.getHistory(chat._id);
   
         socket.emit("chatHistory", chatHistory);
@@ -65,10 +60,6 @@ const initApp = async () => {
     socket.on("sendMessage", (reciever, message) => {
       // 2.5.3 Событие newMessage
       socket.emit("newMessage", message);
-      try {
-      } catch (error) {
-        console.log(error);
-      }
     });
   });
 

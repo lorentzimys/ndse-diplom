@@ -5,7 +5,6 @@ import fileUpload from "../middleware/file.js";
 import checkAuth from "../middleware/checkAuth.js";
 import AdvertisementModule from "../modules/Advertisement.js";
 import { AdvertisementModel } from '../models/Advertisement.js';
-import checkIsCurrentUser from '../middleware/checkIsCurrentUser.js';
 
 const adRouter = Router();
 
@@ -77,9 +76,16 @@ const deleteAd = async (req, res) => {
     const { id } = req.params;
     const deletedAd = await AdvertisementModule.remove(id);
 
-    res.status(204);
+    if (!deletedAd) {
+      return res.status(500).json({
+        error: "Объявление не найдено",
+        status: "error"
+      });
+    }
+
+    return res.status(204).end();
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       error: err._message ?? "Ошибка сервера",
       status: "error"
     });
@@ -127,7 +133,7 @@ const createAd = async (req, res, next) => {
 };
 
 adRouter.get(API_PATHS.GET_ADVERTISEMENT, getAd);
-adRouter.delete(API_PATHS.DELETE_ADVERTISEMENT, checkAuth, checkIsCurrentUser, deleteAd);
+adRouter.delete(API_PATHS.DELETE_ADVERTISEMENT, checkAuth, deleteAd);
 adRouter.post(API_PATHS.CREATE_ADVERTISEMENT, checkAuth, fileUpload.array("images"), createAd);
 adRouter.get(API_PATHS.GET_ADVERTISEMENTS, getAllAds);
 

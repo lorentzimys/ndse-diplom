@@ -41,9 +41,11 @@ class AdvertisementModule {
         isDeleted: true,
       });
 
+      console.log(ad);
+
       return ad;
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }
 }

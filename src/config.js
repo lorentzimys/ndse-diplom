@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { resolve } from 'path';
 
 dotenv.config({
-  path: dirname(fileURLToPath(import.meta.url))
+  path: resolve(process.cwd(), '.env'),
 });
 
 /* Main app */
@@ -13,7 +12,7 @@ export const ENCODING = "utf8";
 
 export const HOST = process.env.HOST || "localhost";
 
-export const PORT = process.env.PORT || DEFAULT_PORT;
+export const PORT = process.env.HTTP_PORT || DEFAULT_PORT;
 
 /* Mongo */
 const DEFAULT_MONGO_PORT = 27017;

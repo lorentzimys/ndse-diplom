@@ -15,10 +15,6 @@ class ChatModule {
    * @returns {SocketIO.Server}
    */
   static prepareSocketConnection = (httpServer) => {
-    if (this.io) {
-      return this.io;
-    }
-
     this.io = new Server(httpServer);
 
     // convert a connect middleware to a Socket.IO middleware
@@ -28,8 +24,13 @@ class ChatModule {
     this.io.use(wrap(passport.initialize()));
     this.io.use(wrap(passport.session()));
 
-    this.io.on("connection", (socket) => {
-      console.log("connected");
+    // Socket auth guard
+    this.io.use((socket, next) => {
+      if (socket.request.user) {
+        next();
+      } else {
+        next(new Error('unauthorized'))
+      }
     });
 
     httpServer.listen(PORT, async () => {
@@ -154,11 +155,11 @@ class ChatModule {
    */
   static async subscribe(cb) {
     this.io.on("connection", (socket) => {
-      const currentUser = '64c1cfeaa31842a90f817e88';
+      const currentUser = socket.request.user;;
       
       socket.on("sendMessage", async (reciever, message) => {
         try {
-          const chat = await ChatModule.find([currentUser, reciever]);
+          const chat = await ChatModule.find([currentUser.id, reciever]);
           
           cb({ chatId: chat._id, message })
         } catch (error) {

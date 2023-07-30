@@ -1,22 +1,17 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-
-import passport from "passport";
-
-import path from "path";
+import { resolve } from "path";
 import { createServer } from "http";
 
 import { PORT, MONGO_URL } from "./config.js";
 
 import ChatModule from "./modules/Chat.js";
+import UserModule from "./modules/User.js";
 
 import authRouter from "./routes/User.js";
 import adRouter from "./routes/Advertisement.js";
 import chatRouter from "./routes/Chat.js";
-
-
-import UserModule from "./modules/User.js";
 
 const initMongoDb = async () => {
   try {
@@ -32,7 +27,7 @@ const initApp = async () => {
 
   await initMongoDb();
   
-  app.use(express.static(path.resolve("public")));
+  app.use(express.static(resolve("public")));
   app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -69,7 +64,7 @@ const initApp = async () => {
     console.log(`Chat module subsctiption: chatId=${chatId}, message=${message}`);
   });
  
-  app.set("views", path.resolve("src", "views"));
+  app.set("views", resolve("src", "views"));
   app.set("view engine", "ejs");
   
   app.use('/', authRouter);

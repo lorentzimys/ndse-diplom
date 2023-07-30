@@ -174,9 +174,13 @@ class ChatModule {
    * @returns {ChatMessageModel[] | null}
    */
   static async getHistory(id) {
-    const chat = await ChatModel.findById(id);
-
-    return chat?.messages ?? null
+    try {
+      const chat = await ChatModel.findById(id);
+  
+      return chat?.messages ?? null
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
